@@ -13,7 +13,7 @@ module = Blueprint("exchange", __name__, url_prefix="/exchange")
 @module.route('/pair', methods=['POST', 'GET'])
 @token_required()
 def get_exchange_rate():
-    from_currency = request.json['from']
+    from_currency = request.json['from']  # marshmallow Validation icin.
     to_currency = request.json['to']
     url = configuration.BASE_URL + configuration.API_KEY
     if check_currencies(from_currency, to_currency):

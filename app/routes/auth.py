@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, make_response
 
 from app import db
 from app.dto.auth import Auth
+from app.models.user import Users # TODO burdan import edecek mi?
 
 module = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -24,7 +25,7 @@ def logout():
 def register():
     data = request.get_json()
 
-    from app import Users  # TODO why should I import users HERE?
+    # from app import Users  # TODO why should I import users HERE?
     user = Users.query.filter(Users.name == data['name']).first()
 
     if not data['password']:
@@ -38,4 +39,4 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message': 'registeration successfully'})
+    return jsonify({'message': 'registeration successfully'})# genelde boyle kullanilio!
